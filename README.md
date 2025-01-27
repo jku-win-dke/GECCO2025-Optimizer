@@ -1,4 +1,4 @@
-# HARMONIC-Optimizer-2
+# GECCO2025-Optimizer
 
 
 ## Introduction
