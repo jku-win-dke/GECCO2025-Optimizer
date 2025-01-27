@@ -24,8 +24,6 @@ class OptimizationController:
         optimization_id = uuid.uuid4()
         while optimization_id in self.optimizations:
             optimization_id = uuid.uuid4()
-        # TODO: uncomment for development purposes
-        # optimization_id = uuid.UUID("550e8400-e29b-41d4-a716-446655440000")
 
         optimization.optimization_id = optimization_id
 

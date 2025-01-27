@@ -5,29 +5,19 @@ from pydantic import BaseModel
 
 from app.models.framework.pygad.custom.crossover.enum import CustomCrossoverEnum
 from app.models.framework.pygad.custom.mutation.enum import CustomMutationEnum
-from app.models.framework.pygad.custom.selection.enum import CustomSelectionEnum
 
 
 class PygadFrameworkBase(ABC, BaseModel):
     framework_type: Literal["pygad"] = "pygad"
     # for uox
     keep_genes_probability: Optional[float] = None
-    # for spea2
-    _archive = []
-    archive_size: Optional[int] = None
-    # for npga
-    comparison_sample_size: Optional[int] = None
-    niche_radius: Optional[int] = None
 
     num_generations: int
     num_parents_mating: int
     sol_per_pop: int
     init_range_low: int = -4
     init_range_high: int = 4
-    parent_selection_type: Literal['sss', 'rws', 'sus', 'rank', 'random', 'tournament', 'tournament_nsga2', 'nsga2',
-    CustomSelectionEnum.NSGA2_MODIFIED.value[0], CustomSelectionEnum.SPEA2.value[0],
-    CustomSelectionEnum.TOURNAMENT_BINARY.value[0], CustomSelectionEnum.TOURNAMENT_RANDOM.value[0],
-    CustomSelectionEnum.NPGA.value[0]]
+    parent_selection_type: Literal['sss', 'rws', 'sus', 'rank', 'random', 'tournament', 'tournament_nsga2', 'nsga2']
     keep_parents: int = 0
     keep_elitism: int = 0
     K_tournament: int = 3
@@ -68,28 +58,3 @@ class PygadFrameworkBase(ABC, BaseModel):
                 if self.crossover_type == crossover.value[0]:
                     return crossover.value[1]
         return self.crossover_type
-
-    @property
-    def parent_selection_mapping(self):
-        if isinstance(self.parent_selection_type, str):
-            if self.parent_selection_type == CustomSelectionEnum.SPEA2.value[0]:
-                if self.archive_size is None:
-                    raise ValueError("archive_size is None")
-                return lambda fitness, num_parents, ga_instance: (
-                    CustomSelectionEnum.SPEA2.value[1](fitness,
-                                                       num_parents,
-                                                       ga_instance,
-                                                       self._archive,
-                                                       self.archive_size))
-            if self.parent_selection_type == CustomSelectionEnum.NPGA.value[0]:
-                if self.comparison_sample_size is None:
-                    raise ValueError("comparison_sample_size is None")
-                if self.niche_radius is None:
-                    raise ValueError("niche_radius is None")
-                return lambda fitness, num_parents, ga_instance: (
-                    CustomSelectionEnum.NPGA.value[1](fitness, num_parents, ga_instance,
-                                                      self.comparison_sample_size, self.niche_radius))
-            for selection in CustomSelectionEnum:
-                if self.parent_selection_type == selection.value[0]:
-                    return selection.value[1]
-        return self.parent_selection_type

@@ -84,8 +84,6 @@ class PygadFramework(PygadFrameworkBase, Framework):
         start_times: List[float] = []
         end_times: List[float] = []
 
-        # consider keep_elitism, keep_parents, save_solutions, and save_best_solutions configuration
-        # https://pygad.readthedocs.io/en/latest/pygad_more.html#why-the-fitness-function-is-not-called-for-solution-at-index-0
         ga_instance = pygad.GA(
             num_generations=self.num_generations,
             num_parents_mating=self.num_parents_mating,
@@ -96,7 +94,7 @@ class PygadFramework(PygadFrameworkBase, Framework):
             gene_type=int,
             init_range_low=self.init_range_low,
             init_range_high=self.init_range_high,
-            parent_selection_type=self.parent_selection_mapping,
+            parent_selection_type=self.parent_selection_type,
             keep_parents=self.keep_parents,
             keep_elitism=self.keep_elitism,
             K_tournament=self.K_tournament,
@@ -124,8 +122,6 @@ class PygadFramework(PygadFrameworkBase, Framework):
         )
 
         ga_instance.run()
-
-        # TODO: Why do we lose a generation with keep_elitism = 1?
 
         # set duration for each population
         population = temp_populations[0]

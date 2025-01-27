@@ -9,9 +9,6 @@ class PygadFrameworkMapper(BaseMapper):
     def to_dto(obj: PygadFramework) -> PygadFrameworkDTO:
         return PygadFrameworkDTO(
             keep_genes_probability=obj.keep_genes_probability,
-            archive_size=obj.archive_size,
-            comparison_sample_size=obj.comparison_sample_size,
-            niche_radius=obj.niche_radius,
             num_generations=obj.num_generations,
             num_parents_mating=obj.num_parents_mating,
             sol_per_pop=obj.sol_per_pop,
@@ -41,9 +38,6 @@ class PygadFrameworkMapper(BaseMapper):
     def from_dto(dto: PygadFrameworkDTO) -> PygadFramework:
         return PygadFramework(
             keep_genes_probability=dto.keep_genes_probability,
-            archive_size=dto.archive_size,
-            comparison_sample_size=dto.comparison_sample_size,
-            niche_radius=dto.niche_radius,
             num_generations=dto.num_generations,
             num_parents_mating=dto.num_parents_mating,
             sol_per_pop=dto.sol_per_pop,
