@@ -21,7 +21,7 @@ async def lifespan(app: FastAPI):
 
 # Create a FastAPI instance
 app = FastAPI(
-    title='HARMONIC-Optimizer',
+    title='GECCO2025-Optimizer',
     description='API for the GECCO2025-Optimizer',
     version='0.0.1',
     lifespan=lifespan

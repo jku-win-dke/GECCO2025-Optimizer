@@ -20,7 +20,7 @@ def setup_logger():
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         level=logging.DEBUG)
 
-    logging.info('Starting the HARMONIC-Controller API.')
+    logging.info('Starting the GECCO2025-Optimizer API.')
 
 
 # Set up logging and create logger for this module

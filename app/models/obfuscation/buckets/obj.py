@@ -24,7 +24,7 @@ class BucketsObfuscation(BucketsObfuscationBase, Obfuscation):
         estimated_min_fitness = maximum_fitness - (2 * abs(maximum_fitness))
         distance = abs((maximum_fitness - estimated_min_fitness) / (self.buckets - 1))
 
-        # Set the bucket mapping for each harmonic_objective to be obfuscated
+        # Set the bucket mapping for each objective to be obfuscated
         bucket_mapping = np.linspace(minimum_fitness, maximum_fitness, self.buckets + 1)[::-1]
 
         buckets = []

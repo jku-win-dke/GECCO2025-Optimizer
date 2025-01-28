@@ -76,7 +76,7 @@ def filter_pareto_optimal_solutions(solutions: List[Solution]) -> List[Solution]
             # the fitness values of the comparison solution
             dominated = np.all(fitness <= comparison_fitness)
 
-            # Solution is strictly dominated if it is dominated and the fitness value for one harmonic_objective
+            # Solution is strictly dominated if it is dominated and the fitness value for one objective
             # is smaller than the fitness value of the comparison solution
             strictly_dominated = dominated and np.any(fitness < comparison_fitness)
 
